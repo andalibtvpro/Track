@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة الأفلام</title>
+    <style>
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 8px;
+            text-align: center;
+            max-width: 200px;
+        }
+        .card img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>قائمة الأفلام الجديدة</h1>
+    <div id="movies-container" style="display: flex; flex-wrap: wrap;"></div>
+
+    <script>
+        const jsonUrl = './movies.json';  // استبدل هذا بالرابط الكامل إذا رفعت الملف إلى GitHub
+
+        async function loadMovies() {
+            try {
+                const response = await fetch(jsonUrl);
+                if (!response.ok) throw new Error('Failed to fetch');
+                const movies = await response.json();
+
+                const container = document.getElementById('movies-container');
+                movies.forEach(movie => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <img src="${movie.image}" alt="${movie.title}">
+                        <h3>${movie.title}</h3>
+                        <p>${movie.genre}</p>
+                        <a href="${movie.link}" target="_blank">مشاهدة الآن</a>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error loading movies:', error);
+            }
+        }
+
+        loadMovies();
+    </script>
+</body>
+</html>
