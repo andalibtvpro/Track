@@ -1,27 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Firebase Libraries -->
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-messaging.js"></script>
-
-<!-- Firebase Configuration -->
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBsEI9jWF8G-2iV5g6n74-hEBuHFmA4JIA",
-    authDomain: "track-95e8f.firebaseapp.com",
-    projectId: "track-95e8f",
-    storageBucket: "track-95e8f.firebasestorage.app",
-    messagingSenderId: "121278257802",
-    appId: "1:121278257802:web:d16b4f40de0ec79bf9eb73",
-    measurementId: "G-Y5X7J598NF"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const messaging = firebase.messaging();
-</script>
+  
   <div id="movies-container"></div>
   <title>قائمة الأفلام</title>
   <meta charset="UTF-8">
@@ -133,5 +113,27 @@
     loadMovies();
   </script>
  <script src="script.js"></script>
+  <!-- Firebase Libraries -->
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-messaging.js"></script>
+
+<!-- Firebase Configuration -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBsEI9jWF8G-2iV5g6n74-hEBuHFmA4JIA",
+    authDomain: "track-95e8f.firebaseapp.com",
+    projectId: "track-95e8f",
+    storageBucket: "track-95e8f.firebasestorage.app",
+    messagingSenderId: "121278257802",
+    appId: "1:121278257802:web:d16b4f40de0ec79bf9eb73",
+    measurementId: "G-Y5X7J598NF"
+  };
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const analytics = firebase.analytics();
+  const messaging = firebase.messaging();
+</script>
 </body>
 </html>
