@@ -1,31 +1,20 @@
-import requests
-from bs4 import BeautifulSoup
-import json
-
-# رابط الموقع الذي تريد جلب البيانات منه
-URL = 'https://flixtor.to/home'
-
-# إرسال طلب إلى الموقع
-response = requests.get(URL)
-soup = BeautifulSoup(response.content, 'html.parser')
-
-# استخراج البيانات (مثال للأفلام)
-movies = []
-for movie in soup.find_all('div', class_='movie-element-class'):  # عدل بناءً على بنية الموقع
-    title = movie.find('h3').text.strip()  # استخراج العنوان
-    link = movie.find('a')['href']  # رابط المشاهدة
-    image = movie.find('img')['src']  # رابط الصورة
-    genre = movie.find('span', class_='genre-class').text.strip()  # النوع (فيلم/مسلسل)
-
-    movies.append({
-        'title': title,
-        'link': f"https://flixtor.to{link}",  # إضافة الرابط الكامل
-        'image': image,
-        'genre': genre
-    })
-
-# حفظ البيانات في ملف JSON باسم updates.json
-with open('updates.json', 'w', encoding='utf-8') as f:
-    json.dump(movies, f, ensure_ascii=False, indent=4)
-
-print("تم استخراج البيانات وحفظها في updates.json")
+[
+    {
+        "title": "فيلم 1",
+        "link": "https://flixtor.to/movie1",
+        "image": "https://flixtor.to/movie1-image.jpg",
+        "genre": "Action"
+    },
+    {
+        "title": "فيلم 2",
+        "link": "https://flixtor.to/movie2",
+        "image": "https://flixtor.to/movie2-image.jpg",
+        "genre": "Drama"
+    },
+    {
+        "title": "فيلم 3",
+        "link": "https://flixtor.to/movie3",
+        "image": "https://flixtor.to/movie3-image.jpg",
+        "genre": "Comedy"
+    }
+]
