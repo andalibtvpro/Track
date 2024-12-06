@@ -87,10 +87,8 @@
         const movies = await response.json();
         const container = document.getElementById('movies-container');
 
-        // مسح المحتوى الحالي
-        container.innerHTML = '';
+        container.innerHTML = ''; // مسح المحتوى الحالي
 
-        // إنشاء البطاقات
         movies.forEach(movie => {
           const card = document.createElement('div');
           card.classList.add('card');
