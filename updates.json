@@ -1,20 +1,14 @@
 [
-    {
-        "title": "فيلم 1",
-        "link": "https://flixtor.to/movie1",
-        "image": "https://flixtor.to/movie1-image.jpg",
-        "genre": "Action"
-    },
-    {
-        "title": "فيلم 2",
-        "link": "https://flixtor.to/movie2",
-        "image": "https://flixtor.to/movie2-image.jpg",
-        "genre": "Drama"
-    },
-    {
-        "title": "فيلم 3",
-        "link": "https://flixtor.to/movie3",
-        "image": "https://flixtor.to/movie3-image.jpg",
-        "genre": "Comedy"
-    }
+  {
+    "title": "فيلم 1",
+    "link": "https://flixtor.to/movie1",
+    "image": "https://via.placeholder.com/300x400.png?text=Movie+1",
+    "genre": "Action"
+  },
+  {
+    "title": "فيلم 2",
+    "link": "https://flixtor.to/movie2",
+    "image": "https://via.placeholder.com/300x400.png?text=Movie+2",
+    "genre": "Drama"
+  }
 ]
