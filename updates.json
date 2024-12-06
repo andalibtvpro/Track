@@ -1,14 +1,15 @@
-[
-  {
-    "title": "فيلم 1",
-    "link": "https://flixtor.to/movie1",
-    "image": "https://via.placeholder.com/300x400.png?text=Movie+1",
-    "genre": "Action"
-  },
-  {
-    "title": "فيلم 2",
-    "link": "https://flixtor.to/movie2",
-    "image": "https://via.placeholder.com/300x400.png?text=Movie+2",
-    "genre": "Drama"
+const apiUrl = 'https://example.com/ajax/v4/movies'; // الرابط الصحيح
+
+async function fetchMovies() {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error('فشل في تحميل البيانات');
+
+    const data = await response.json(); // فك التشفير إذا لزم الأمر
+    console.log(data); // تحقق من البيانات
+  } catch (error) {
+    console.error('خطأ في تحميل الأفلام:', error);
   }
-]
+}
+
+fetchMovies();
