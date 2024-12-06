@@ -1,32 +1,27 @@
-const apiUrl = 'رابط-المصدر-الفعلي'; // استبدل رابط المصدر هنا
+// طلب الإذن من المستخدم
+messaging
+  .requestPermission()
+  .then(() => {
+    console.log('Notification permission granted.');
+    return messaging.getToken({ vapidKey: 'YOUR_PUBLIC_VAPID_KEY' }); // استبدل YOUR_PUBLIC_VAPID_KEY بالمفتاح من Firebase Console
+  })
+  .then((token) => {
+    console.log('User FCM Token:', token);
+    // احفظ التوكن في قاعدة البيانات لإرسال الإشعارات لاحقًا
+  })
+  .catch((err) => {
+    console.log('Unable to get permission to notify.', err);
+  });
 
-async function fetchMovies() {
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error('فشل في الحصول على البيانات');
-    const data = await response.json();
-    console.log(data); // عرض البيانات في الـ Console
+// التعامل مع الإشعارات الواردة أثناء استخدام التطبيق
+messaging.onMessage((payload) => {
+  console.log('Message received. ', payload);
+  // عرض الإشعار
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+    icon: '/icon.png'
+  };
 
-    const container = document.getElementById('movies-container');
-    container.innerHTML = ''; // تفريغ المحتوى الحالي
-
-    data.forEach(movie => {
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.innerHTML = `
-        <img src="${movie.image}" alt="${movie.title}">
-        <div class="card-content">
-          <h2 class="card-title">${movie.title}</h2>
-          <p class="card-genre">${movie.genre}</p>
-          <a class="card-link" href="${movie.link}" target="_blank">مشاهدة الآن</a>
-        </div>
-      `;
-      container.appendChild(card);
-    });
-  } catch (error) {
-    console.error('خطأ في الحصول على البيانات:', error);
-    document.getElementById('movies-container').innerHTML = '<p>حدث خطأ أثناء تحميل البيانات</p>';
-  }
-}
-
-fetchMovies();
+  new Notification(notificationTitle, notificationOptions);
+});
