@@ -1,7 +1,4 @@
-# Let's create the JSON file "updates.json" with example content.
-
-# Define the content of the JSON file
-json_content = [
+[
     {
         "title": "فيلم 1",
         "link": "https://flixtor.to/movie1"
@@ -11,14 +8,3 @@ json_content = [
         "link": "https://flixtor.to/movie2"
     }
 ]
-
-# Path to save the file
-file_path = "/mnt/data/updates.json"
-
-# Write the content to the file
-import json
-
-with open(file_path, "w", encoding="utf-8") as json_file:
-    json.dump(json_content, json_file, ensure_ascii=False, indent=4)
-
-file_path
