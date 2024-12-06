@@ -1,10 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to GitHub Pages</title>
+  <title>عرض الأفلام</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    li {
+      background: #fff;
+      margin: 10px 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+    a:hover {
+      color: #007bff;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to My GitHub Pages Site</h1>
-    <p>This is a basic index.html file for testing GitHub Pages.</p>
+  <h1>قائمة الأفلام</h1>
+  <h2>أحدث الأفلام المضافة</h2>
+  <ul id="movies-list">
+    <li>جاري تحميل البيانات...</li>
+  </ul>
+  <script>
+    const jsonUrl = 'https://www.zilswappers.com/updates.json'; // تأكد من أن هذا الرابط صحيح
+
+    async function loadMovies() {
+      try {
+        const response = await fetch(jsonUrl);
+        if (!response.ok) throw new Error('Failed to fetch');
+        const movies = await response.json();
+        const moviesList = document.getElementById('movies-list');
+        moviesList.innerHTML = ''; // مسح المحتوى الحالي
+
+        // عرض الأفلام في القائمة
+        movies.forEach(movie => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `<a href="${movie.link}" target="_blank">${movie.title}</a>`;
+          moviesList.appendChild(listItem);
+        });
+      } catch (error) {
+        console.error('Error loading movies:', error);
+        const moviesList = document.getElementById('movies-list');
+        moviesList.innerHTML = '<li>حدث خطأ أثناء تحميل البيانات</li>';
+      }
+    }
+
+    // استدعاء الوظيفة عند تحميل الصفحة
+    loadMovies();
+  </script>
 </body>
 </html>
