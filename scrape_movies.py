@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import json
 
 # رابط الموقع لجلب الأفلام
-URL = 'https://example.com/home'  # قم بتبديله بالرابط الصحيح
+URL = 'https://flixtor.to/home'  # قم بتبديله بالرابط الصحيح
 
 # إرسال طلب إلى الموقع
 response = requests.get(URL)
