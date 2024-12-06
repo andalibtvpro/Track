@@ -1,72 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>عرض الأفلام</title>
+  <title>قائمة الأفلام</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
       background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
     }
-    h1, h2 {
-      text-align: center;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      max-width: 600px;
-      margin: 20px auto;
-    }
-    li {
-      background: #fff;
-      margin: 10px 0;
-      padding: 15px;
+    .card {
+      display: inline-block;
+      width: 300px;
+      margin: 10px;
       border: 1px solid #ddd;
       border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      background-color: #fff;
     }
-    a {
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-title {
+      font-size: 18px;
+      margin: 0 0 10px;
+    }
+    .card-genre {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .card-link {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: #fff;
       text-decoration: none;
-      color: #333;
+      border-radius: 5px;
     }
-    a:hover {
-      color: #007bff;
+    .card-link:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <h1>قائمة الأفلام</h1>
-  <h2>أحدث الأفلام المضافة</h2>
-  <ul id="movies-list">
-    <li>جاري تحميل البيانات...</li>
-  </ul>
+  <h1>قائمة الأفلام والمسلسلات الجديدة</h1>
+  <div id="movies-container"></div>
+
   <script>
-    const jsonUrl = 'https://www.zilswappers.com/updates.json'; // تأكد من أن هذا الرابط صحيح
+    // هنا ضع رابط ملف JSON الخاص بك
+    const jsonUrl = 'https://myusername.github.io/myrepo/updates.json'; 
 
     async function loadMovies() {
       try {
         const response = await fetch(jsonUrl);
         if (!response.ok) throw new Error('Failed to fetch');
         const movies = await response.json();
-        const moviesList = document.getElementById('movies-list');
-        moviesList.innerHTML = ''; // مسح المحتوى الحالي
+        const container = document.getElementById('movies-container');
 
-        // عرض الأفلام في القائمة
         movies.forEach(movie => {
-          const listItem = document.createElement('li');
-          listItem.innerHTML = `<a href="${movie.link}" target="_blank">${movie.title}</a>`;
-          moviesList.appendChild(listItem);
+          const card = document.createElement('div');
+          card.classList.add('card');
+          card.innerHTML = `
+            <img src="${movie.image}" alt="${movie.title}">
+            <div class="card-content">
+              <h2 class="card-title">${movie.title}</h2>
+              <p class="card-genre">${movie.genre}</p>
+              <a class="card-link" href="${movie.link}" target="_blank">مشاهدة الآن</a>
+            </div>
+          `;
+          container.appendChild(card);
         });
       } catch (error) {
         console.error('Error loading movies:', error);
-        const moviesList = document.getElementById('movies-list');
-        moviesList.innerHTML = '<li>حدث خطأ أثناء تحميل البيانات</li>';
+        document.getElementById('movies-container').innerHTML = '<p>حدث خطأ أثناء تحميل البيانات</p>';
       }
     }
 
-    // استدعاء الوظيفة عند تحميل الصفحة
     loadMovies();
   </script>
 </body>
